@@ -1,0 +1,60 @@
+<html>
+    <body>
+        <canvas id="canvas" width="800" height="600"></canvas>
+        <script src="./robot-arm.js"></script>
+        <script>
+            // Robotarm bibliotheek inladen
+            var canvas = document.getElementById("canvas");
+            var robotArm = new RobotArm(canvas);
+            
+            // Het level inladen
+            robotArm.loadLevel("exam 2");
+            robotArm.speed = 600;
+            
+            // Deze code pas je NIET aan
+              
+            moveArm("right", 3);
+            moveBlock("left", 3);
+            moveBlock("right", 6);
+            moveBlock("right", 2);
+            moveBlock("right", 6);
+            moveBlock("left", 1);
+            moveBlock("left", 3);
+
+
+            /*
+
+                Je mist twee functies, de moveArm en moveBlock. Dit is de reden dat de robotArm niet opstart en je 
+                een wit scherm krijgt. Deze functies bevatten beide twee parameters. Jij gaat die functies bouwen. 
+                Handig om te weten is dat de functie moveArm ook wordt aangeroepen in de moveBlock functie. De moveBlock 
+                functie pakt een blokje, verplaatst hem naar een bepaalde plaats en verplaatst de arm weer terug naar 
+                boven de stapel. Je mag maximaal 25 regels code toevoegen.
+
+            */
+            
+            function moveArm(direction, amount) {
+                for (let i = 0; i < amount; i++) {
+                    if (direction.toLowerCase() === "left")
+                        robotArm.moveLeft();
+                    else
+                        robotArm.moveRight();
+                }
+            }
+
+            function moveBlock(direction, amount) {
+                robotArm.grab();
+                this.moveArm(direction, amount);
+                robotArm.drop();
+                this.moveArm(direction === "left" ? "right" : "left", amount);
+            }
+
+
+            // Jou instructies voor het werkend maken van de code volgen hier
+
+
+
+            // De door jou opgegeven instructies uitvoeren
+            robotArm.run();
+        </script>
+    </body>
+</html>
